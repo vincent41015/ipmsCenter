@@ -1,0 +1,49 @@
+﻿.BeckButton1
+{
+    border-radius:5px;    
+}
+
+#css_table {
+      display:table;
+  }
+.css_tr {
+      display: table-row;
+  }
+.css_td {
+      display: table-cell;
+      padding:5px;
+  }
+.css_CarStatus
+{
+    width:20px;
+    height:20px;
+    position:absolute;
+	border-radius:50%;
+    }
+    
+ .css_AlarmData
+{
+    width:20px;
+    height:20px;
+    position:absolute;
+	border-radius:50%;
+    }
+ .css_AirData
+{
+    width:40px;
+    height:25px;
+    text-align: center;
+vertical-align: middle;
+line-height: 25px;
+    position:absolute;
+	border-radius:2px;
+	color:Black;
+	
+    }   
+    
+    #ctl00_ContentPlaceHolder1_GridView1 td
+    {
+        vertical-align: middle;
+	
+        }
+    

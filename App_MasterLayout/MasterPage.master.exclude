@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="App_MasterLayout_MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>未命名頁面</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <script language="javascript" type="text/javascript">
+        function td_open() {
+            var tb = document.getElementById('disvisible_td');
+            var wd = document.getElementById('width_td');
+            var img_open = document.getElementById('img_open');
+            var img_close = document.getElementById('img_close');
+            img_open.style.display = 'none';
+            img_close.style.display = 'inline';
+            tb.style.display = 'inline-table';
+            wd.style.width = '80%';
+        }
+        function td_close() {
+            var tb = document.getElementById('disvisible_td');
+            var wd = document.getElementById('width_td');
+            var img_open = document.getElementById('img_open');
+            var img_close = document.getElementById('img_close');
+            img_open.style.display = 'inline';
+            img_close.style.display = 'none';
+            tb.style.display = 'none';
+            wd.style.width = '99%';
+        }
+    </script>
+
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true"
+        EnableScriptLocalization="true">
+    </asp:ScriptManager>
+    <center>
+        <table style="width: 90%; height: 80px">
+            <tr>
+                <td style="background-color: #333333" align="left">
+                    <img src="../image/TSMC1.png" />
+                </td>
+            </tr>
+        </table>
+        <table style="width: 90%">
+            <tr>
+                <td id="disvisible_td" valign="top" width="15%">
+                    <div style="text-align: left;">
+                        
+                    </div>
+                </td>
+                <td width="1%" valign="top">
+                    <!--   <img id="img_open" alt="" src="../image/rightArrow.png" style="display: none" onclick="td_open();" />
+                    <img id="img_close" alt="" src="../image/leftArrow.png"  
+                        onclick="td_close();" /> -->
+                </td>
+                <td id="width_td" valign="top" width="80%">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+        </table>
+    </center>
+    </form>
+</body>
+</html>

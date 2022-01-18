@@ -1,0 +1,96 @@
+﻿.round-red{
+  width:16px;
+  height:16px;
+  display:inline-block;
+  font-size:16px; /* 修改圆点的大小 */
+  line-heigth:16px;
+  text-align:center;
+  text-decoration:none;
+  color:#F00; /* 修改圆点的颜色 */
+}
+.round-green{
+  width:16px;
+  height:16px;
+  display:inline-block;
+  font-size:16px; /* 修改圆点的大小 */
+  line-heigth:16px;
+  text-align:center;
+  text-decoration:none;
+  color:#0F0; /* 修改圆点的颜色 */
+}
+.round-blue{
+  width:16px;
+  height:16px;
+  display:inline-block;
+  font-size:16px; /* 修改圆点的大小 */
+  line-heigth:16px;
+  text-align:center;
+  text-decoration:none;
+  color:#00F; /* 修改圆点的颜色 */
+}
+.round-yellow{
+  width:16px;
+  height:16px;
+  display:inline-block;
+  font-size:16px; /* 修改圆点的大小 */
+  line-heigth:16px;
+  text-align:center;
+  text-decoration:none;
+  color:#ffff00; /* 修改圆点的颜色 */
+}
+.led-board
+{
+    width:264px;    /*256+4+4*/
+    height:80px;    /* 72+4+4 */
+    z-index: 2; 
+    color: #000000; 
+    background-color: Black;
+    padding: 4px;   
+}
+
+@-webkit-keyframes example {
+    from {background-color: none;font-size:16px;width:20px;height:20px}
+    to {background-color: none;font-size:64px;width:70px;height:70px}
+}
+
+/* Standard syntax */
+@keyframes example {
+    from {background-color: none;font-size:16px;width:20px;height:20px}
+    to {background-color: none;font-size:64px;width:70px;height:70px}
+}
+
+@keyframes colorchange {
+    0%   { background-color: #00F; /* from: blue */ font-size:12px; width:52px;height:16px;}
+    25%  { background-color: #F00; /* red        */ font-size:16px;width:68px;height:20px;}
+    50%  { background-color: #0F0; /* green      */ font-size:20px;width:84px;height:24px;}
+    75%  { background-color: #F0F; /* purple     */ font-size:24px;width:100px;height:28px;}
+    100% { background-color: #00F; /* to: blue   */ font-size:32px;width:132px;height:36px;}
+}
+@-webkit-keyframes colorchange {
+    0%   { background-color: #00F; /* from: blue */ font-size:12px; width:52px;height:16px;}
+    25%  { background-color: #F00; /* red        */ font-size:16px;width:68px;height:20px;}
+    50%  { background-color: #0F0; /* green      */ font-size:20px;width:84px;height:24px;}
+    75%  { background-color: #F0F; /* purple     */ font-size:24px;width:100px;height:28px;}
+    100% { background-color: #00F; /* to: blue   */ font-size:32px;width:132px;height:36px;}
+}
+
+.alarm
+{
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    animation-name: example; /**这里引用了前面定义的动画**/
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    border-radius:50%;
+    }
+
+.part1:hover
+{
+    font-size: 10em;
+    }
+    
+    
+    

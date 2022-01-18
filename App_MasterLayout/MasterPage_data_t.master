@@ -1,0 +1,215 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage_data_t.master.cs"
+    Inherits="App_MasterLayout_MasterPage_data_t" %>
+
+<!DOCTYPE html>
+<!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if (IE 9)&!(IEMobile)]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if (gt IE 9)|(gt IEMobile 7)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head runat="server">
+    <link href="<%=ResolveUrl("~/css/jquery-ui-1.8.2.custom.harryfixed.css")%>" rel="stylesheet"
+        type="text/css" />
+    <%--<script src="<%=ResolveUrl("~/jqueryui/jquery-1.4.js")%>"        type="text/javascript"></script>--%>
+    <%--<script src="<%=ResolveUrl("~/js/libs/jquery-1.8.2.min.js") %>" type="text/javascript"></script>
+    <script src="<%=ResolveUrl( "~/js/libs/jquery-1.8.2-vsdoc.js"  ) %>" type="text/javascript"></script>
+    <script src="../js/jquery-1.8.2.js" type="text/javascript"></script>--%>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>IPMS 2.0 智慧型停車場管理系統</title>
+    <meta name="description" content="ipms intelligent parking management system">
+    <meta name="author" content="500net 2013">
+    <!-- http://davidbcalhoun.com/2010/viewport-metatag -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- For all browsers -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/reset.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/style.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/css.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/colors.css?v=1")%>">
+    <link rel="stylesheet" media="print" href="<%=ResolveUrl("~/css/print.css?v=1")%>">
+    <!-- For progressively larger displays -->
+    <link rel="stylesheet" media="only all and (min-width: 480px)" href="<%=ResolveUrl("~/css/480.css?v=1")%>">
+    <link rel="stylesheet" media="only all and (min-width: 768px)" href="<%=ResolveUrl("~/css/768.css?v=1")%>">
+    <link rel="stylesheet" media="only all and (min-width: 992px)" href="<%=ResolveUrl("~/css/992.css?v=1")%>">
+    <link rel="stylesheet" media="only all and (min-width: 1200px)" href="<%=ResolveUrl("~/css/1200.css?v=1")%>">
+    <!-- For Retina displays -->
+    <link rel="stylesheet" media="only all and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)"
+        href="<%=ResolveUrl("~/css/2x.css?v=1")%>">
+    <!-- Additional styles -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/form.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/switches.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/table.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/modal.css?v=1")%>" />
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/js/libs/DataTables/jquery.dataTables.css?v=1")%>">
+    <!-- Beck -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/Beck.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/20150505.css?v=1")%>">
+    <!-- JavaScript at bottom except for Modernizr -->
+    <script src="<%=ResolveUrl("~/js/libs/modernizr.custom.js")%>"></script>
+    <!-- For Modern Browsers -->
+    <link rel="shortcut icon" href="<%=ResolveUrl("~/img/favicons/favicon.png")%>">
+    <!-- For everything else -->
+    <link rel="shortcut icon" href="<%=ResolveUrl("~/img/favicons/favicon.ico")%>">
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="<%=ResolveUrl("~/img/splash/ipad-landscape.png")%>"
+        media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="<%=ResolveUrl("~/img/splash/ipad-portrait.png")%>"
+        media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="<%=ResolveUrl("~/img/splash/iphone.png")%>"
+        media="screen and (max-device-width: 320px)">
+    <!--  Jquery Loading -->
+    <script src="<%=ResolveUrl("~/js/libs/jquery-1.10.2.min.js")%>"></script>
+    <!-- Microsoft clear type rendering -->
+    <meta http-equiv="cleartype" content="on">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="clearfix with-menu with-shortcuts" style="font-size:16px;" >
+    <form id="form1" runat="server" autocomplete="off" >
+    <asp:ScriptManager ID="ScriptManager1" runat="server" OnAsyncPostBackError="ScriptManager1_AsyncPostBackError">
+    </asp:ScriptManager>
+    <div>
+        <!-- Prompt IE 6 users to install Chrome Frame -->
+        <!--[if lt IE 7]><p class="message red-gradient simpler">Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+        <!-- Title bar -->
+        <header role="banner" id="title-bar">
+            <h2>
+                IPMS 2.0 智慧型停車場管理系統平台  &nbsp;&nbsp; <!--<a href="<%=ResolveUrl("~/IPMS操作手冊1.0.docx")%>">操作手冊</a>--></h2>
+        </header>
+        <!-- Button to open/hide menu -->
+        <a href="#" id="open-menu"><span>選單</span></a>
+        <!-- Button to open/hide shortcuts -->
+        <a href="#" id="open-shortcuts"><span class="icon-thumbs"></span></a>
+        <!-- Main content -->
+        <section role="main" id="main">
+            <noscript class="message black-gradient simpler">
+                Your browser does not support JavaScript! Some features won't work as expected...</noscript>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <div id="loading" class="loader huge">
+            </div>
+        </section>
+        <!-- End main content -->
+        <asp:Literal ID="Li1" runat="server" Text=""></asp:Literal>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder_shortcut" runat="server">
+        </asp:ContentPlaceHolder>
+        <!-- Sidebar/drop-down menu -->
+        <section id="menu" role="complementary">
+            <!-- This wrapper is used by several responsive layouts -->
+            <div id="menu-content">
+                <header>
+				Administrator
+			</header>
+                <div style="position: absolute; right: 10px; top: 50px">
+                    <asp:Button ID="Btn_Logout" runat="server" Text="登出" OnClick="Btn_Logout_Click" CssClass="button"
+                        CausesValidation="False"></asp:Button>
+                </div>
+                <div id="profile">
+                    <img src="<%=ResolveUrl("~/img/user.png") %>" width="64" height="64" alt="User name"
+                        class="user-icon">
+                    Hello <span class="name">
+                        <br />
+                        <asp:Literal ID="User_name" runat="server"></asp:Literal>
+                    </span>
+                </div>
+                <!-- By default, this section is made for 4 icons, see the doc to learn how to change this, in "basic markup explained" -->
+                <%--<ul id="access" class="children-tooltip">
+                <li><a href="data1.aspx" title="Messages"><span class="icon-inbox"></span></a></li>
+				<li><a href="data1.aspx" title="messages"><span class="icon-inbox"></span><span class="count">2</span></a></li>
+				<li><a href="data2.aspx" title="Calendar"><span class="icon-calendar"></span></a></li>
+				<li><a href="data3.aspx" title="Profile"><span class="icon-user"></span></a></li>
+				<li class="disabled"><span class="icon-gear"></span></li>
+			</ul>--%>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                </asp:ContentPlaceHolder>
+                <asp:Literal ID="Li2" runat="server" Text=""></asp:Literal>
+                <%--<section class="navigable">
+				<ul class="big-menu">
+					<li class="with-right-arrow">
+						<span><span class="list-count">1</span>設備狀態子系統</span>
+						<ul class="big-menu">
+							<li><a href="/Report/Device_Operate_Record.aspx">設備狀態查詢</a></li>
+							 
+						</ul>
+					</li>
+					<li class="with-right-arrow">
+						<span><span class="list-count">4</span>設備管理子系統</span>
+						<ul class="big-menu">
+							<li><a href="/System/FloorSetting.aspx">停車場車輛設定</a></li>
+							<li><a href="/System/LED_DisplaySetting.aspx">LED顯示設定</a></li>
+                            <li><a href="/System/LED_Schedule.aspx">LED排程設定</a></li> 
+                            <li><a href="/System/LED_Control.aspx">LED控制</a></li>  
+							 
+						</ul>
+					</li>
+					<li class="with-right-arrow">
+                        <span><span class="list-count">2</span>系統管理子系統</span>
+						<a href="#" class="navigable-ajax" title="Menu title">系統管理子系統</a>
+                        <ul class="big-menu">
+							<li><a href="/data6_1.aspx">角色設定</a></li> 
+                            <li><a href="/data6_2.aspx">權限設定</a></li> 
+						</ul>
+					</li>
+				</ul>
+			</section>--%>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <!-- End content wrapper -->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder4" runat="server">
+            </asp:ContentPlaceHolder>
+        </section>
+        <!-- End sidebar/drop-down menu -->
+    </div>
+    </form>
+    <!-- JavaScript at the bottom for fast page loading -->
+    <!-- Scripts -->
+    <script src="<%=ResolveUrl("~/js/setup.js")%>"></script>
+    <!-- Template functions -->   
+
+     <script src="<%=ResolveUrl("~/js/developr.modal.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.input.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.navigable.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.notify.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.scroll.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.tooltip.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.table.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.tabs.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.accordions.js")%>"></script>
+
+    <!-- Plugins -->
+    <script src="<%=ResolveUrl("~/js/libs/jquery.tablesorter.min.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/libs/DataTables/jquery.dataTables.min.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/libs/dragscroll-master/dragscroll.js")%>"></script>
+    <!--<script src="<%=ResolveUrl("~/js/libs/jquery-ui/jquery-ui.js")%>"></script>-->
+    <script>
+
+        function menulink(v1) {
+            $('#loading').show();
+            window.top, location = v1;
+        }
+
+        // Call template init (optional, but faster if called manually)
+        $.template.init();
+
+        $('#loading').hide();
+
+	
+	$(document).on("click",".modal-blocker",function(){
+		$("#modals").find(".modal").eq(0).closeModal();
+	});
+        
+        
+
+	    
+    </script>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder5" runat="server">
+        
+    </asp:ContentPlaceHolder>
+</body>
+</html>

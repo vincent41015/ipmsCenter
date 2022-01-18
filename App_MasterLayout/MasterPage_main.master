@@ -1,0 +1,810 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage_main.master.cs"
+    Inherits="App_MasterLayout_MasterPage_Main" %>
+
+<!DOCTYPE html>
+<!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if (IE 9)&!(IEMobile)]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if (gt IE 9)|(gt IEMobile 7)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>IPMS 2.0 智慧型停車場管理系統</title>
+    <meta name="description" content="ipms intelligent parking management system" />
+    <meta name="author" content="500net 2013" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- For all browsers -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/reset.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/style.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/colors.css?v=1")%>">
+    <link rel="stylesheet" media="print" href="<%=ResolveUrl("~/css/print.css?v=1")%>">
+    <!-- For progressively larger displays -->
+    <link rel="stylesheet" media="only all and (min-width: 480px)" href="<%=ResolveUrl("~/css/480.css?v=1")%>">
+    <link rel="stylesheet" media="only all and (min-width: 768px)" href="<%=ResolveUrl("~/css/768.css?v=1")%>">
+    <link rel="stylesheet" media="only all and (min-width: 992px)" href="<%=ResolveUrl("~/css/992.css?v=1")%>">
+    <link rel="stylesheet" media="only all and (min-width: 1200px)" href="<%=ResolveUrl("~/css/1200.css?v=1")%>">
+    <!-- For Retina displays -->
+    <link rel="stylesheet" media="only all and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)"
+        href="<%=ResolveUrl("~/css/2x.css?v=1")%>">
+    <!-- Webfonts 
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>-->
+    <!-- Additional styles -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/agenda.css?v=1")%>" />
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/dashboard.css?v=1")%>" />
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/form.css?v=1")%>" />
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/modal.css?v=1")%>" />
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/progress-slider.css?v=1")%>" />
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/switches.css?v=1")%>" />
+    <!-- Additional styles -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/form.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/switches.css?v=1")%>">
+    <link rel="stylesheet" href="<%=ResolveUrl("~/css/styles/table.css?v=1")%>">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<%=ResolveUrl("~/js/libs/DataTables/jquery.dataTables.css?v=1")%>">
+    <link href="<%=ResolveUrl("~/css/20150505.css?v=201507061631")%>" rel="stylesheet"
+        type="text/css" />
+    <!-- JavaScript at bottom except for Modernizr -->
+    <script src="<%=ResolveUrl("~/js/libs/modernizr.custom.js")%>"></script>
+    <!-- For Modern Browsers -->
+    <link rel="shortcut icon" href="<%=ResolveUrl("~/img/favicons/favicon.png")%>">
+    <!-- For everything else -->
+    <link rel="shortcut icon" href="<%=ResolveUrl("~/img/favicons/favicon.ico")%>">
+    <!-- Microsoft clear type rendering -->
+    <meta http-equiv="cleartype" content="on">
+    <script src="<%=ResolveUrl("~/js/libs/jquery-1.10.2.min.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/libs/moment.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/libs/Chart.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/libs/ECharts/echarts-all.js")%>"></script>
+    <script>
+        $(document).ready(function () {
+            //setInterval( checkAlarm , 5000);
+        });
+
+    </script>
+    <script>
+        function checkAlarm() {
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Center/Functions/myWebService.asmx/checkAlarm",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess_,
+                error: OnErrorCall_
+            });
+        }
+
+        function OnSuccess_(reponse) {
+
+            var aData = reponse.d;
+            //var aLabels = aData[0];
+            var aDatasets = aData[0];
+            //console.log(aDatasets.length);
+
+            if (aDatasets.length > 0) {
+                for (i = 0; i < aDatasets.length; i++) {
+                    console.log(aDatasets[i]._id);
+                    console.log(aDatasets[i].displayMessage);
+                    //$.modal.alert(aDatasets[i].displayMessage);
+                    console.log('Center/Alert/Default3.aspx?_id=' + aDatasets[i].displayMessage);
+                    var tempUrl = '/Center/Alert/Default3.aspx?_id=' + aDatasets[i]._id + '&SName=' + aDatasets[i].SName + '&Category=' + aDatasets[i].Category;
+
+                    $.modal({
+                        title: 'Alert window',
+                        content: aDatasets[i].displayMessage,
+                        buttons: { '檢視': {
+                            classes: 'blue-gradient glossy big',
+                            click: function (modal) { window.location = tempUrl }
+                        },
+                            '關閉': function (modal) { modal.closeModal(); }
+                        },
+                        buttonsAlign: 'center',
+                        resizable: false
+                    });
+
+                }
+            }
+
+
+
+
+        }
+
+        function OnErrorCall_(repo) {
+            console.log('alarm false');
+            alert("Woops something went wrong, pls try later !");
+        }
+
+
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="clearfix with-menu with-shortcuts" style="font-size:16px;" >
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" OnAsyncPostBackError="ScriptManager1_AsyncPostBackError"
+        EnablePageMethods="true">
+    </asp:ScriptManager>
+    <div>
+        <!-- Prompt IE 6 users to install Chrome Frame -->
+        <!--[if lt IE 7]><p class="message red-gradient simpler">Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+        <!-- Title bar -->
+        <header role="banner" id="title-bar">
+            <h2>
+                IPMS 2.0 智慧型停車場管理系統平台  &nbsp;&nbsp; <a href="<%=ResolveUrl("~/IPMS操作手冊1.0.docx")%>">操作手冊</a></h2>
+        </header>
+        <!-- Button to open/hide menu -->
+        <a href="#" id="open-menu"><span>選單</span></a>
+        <!-- Button to open/hide shortcuts -->
+        <a href="#" id="open-shortcuts"><span class="icon-thumbs"></span></a>
+        <!-- Main content -->
+        <section role="main" id="main">
+            <noscript class="message black-gradient simpler">
+                Your browser does not support JavaScript! Some features won't work as expected...</noscript>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <div id="loading" class="loader huge">
+            </div>
+        </section>
+        <!-- End main content -->
+        <!-- Side tabs shortcuts -->
+        <%--<ul id="shortcuts" role="complementary" class="children-tooltip tooltip-right">
+		    <li class="current"><a href="#" onclick="menulink('main.aspx');" class="shortcut-dashboard" title="資訊看版">資訊看版</a></li>
+		    <li><a href="#"  onclick="menulink('data1.aspx');" class="shortcut-messages" title="出入明細">出入明細</a></li>
+		    <li><a href="#" onclick="menulink('data2.aspx');" class="shortcut-agenda" title="登錄資料">登錄資料</a></li>
+		    <li><a href="#" onclick="menulink('data3.aspx');" class="shortcut-contacts" title="區域明細">區域明細</a></li>
+		    <li><a href="#" onclick="menulink('data4.aspx');" class="shortcut-medias" title="車位查詢">車位查詢</a></li>
+		    <li><a href="#" onclick="menulink('data5.aspx');" class="shortcut-stats" title="管理報表">管理報表</a></li>
+		    <li class="at-bottom"><a href="#" onclick="menulink('data6.aspx');" class="shortcut-settings" title="權限管理">權限管理</a></li>
+		    
+            <li><a href="#" onclick="menulink('data8.aspx');" class="shortcut-notes" title="系統設定">系統設定</a></li>
+	    </ul>--%>
+        <asp:Literal ID="Li1" runat="server" Text=""></asp:Literal>
+        <!-- Sidebar/drop-down menu -->
+        <section id="menu" role="complementary">
+            <!-- This wrapper is used by several responsive layouts -->
+            <div id="menu-content">
+                <header>
+				Administrator
+			</header>
+                <div style="position: absolute; right: 10px; top: 50px">
+                    <asp:Button ID="Btn_Logout" runat="server" Text="登出" OnClick="Btn_Logout_Click" CssClass="button">
+                    </asp:Button>
+                </div>
+                <div id="profile">
+                    <img src="<%=ResolveUrl("~/img/user.png") %>" width="64" height="64" alt="User name"
+                        class="user-icon">
+                    Hello <span class="name">
+                        <br />
+                        <asp:Literal ID="User_name" runat="server"></asp:Literal>
+                    </span>
+                </div>
+                <!-- By default, this section is made for 4 icons, see the doc to learn how to change this, in "basic markup explained" -->
+                <%--<ul id="access" class="children-tooltip">
+				<li><a href="data1.aspx" title="Messages"><span class="icon-inbox"></span><span class="count">2</span></a></li>
+                <li><a href="data1.aspx" title="Messages"><span class="icon-inbox"></span></a></li>
+				<li><a href="data2.aspx" title="Calendar"><span class="icon-calendar"></span></a></li>
+				<li><a href="data3.aspx" title="Profile"><span class="icon-user"></span></a></li>
+				<li class="disabled"><span class="icon-gear"></span></li>
+			</ul>--%>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                </asp:ContentPlaceHolder>
+                <%--<section class="navigable">
+				<ul class="big-menu">
+					<li class="with-right-arrow">
+						<span><span class="list-count">11</span>設備狀態子系統</span>
+						<ul class="big-menu">
+							<li><a href="typography.html">Typography</a></li>
+							<li><a href="columns.html">Columns</a></li>
+							<li><a href="tables.html">Tables</a></li>
+							<li><a href="colors.html">Colors &amp; backgrounds</a></li>
+							<li><a href="icons.html">Icons</a></li>
+							<li><a href="files.html">Files &amp; Gallery</a></li>
+							<li class="with-right-arrow">
+								<span><span class="list-count">4</span>Forms &amp; buttons</span>
+								<ul class="big-menu">
+									<li><a href="buttons.html">Buttons</a></li>
+									<li><a href="form.html">Form elements</a></li>
+									<li><a href="textareas.html">Textareas &amp; WYSIWYG</a></li>
+									<li><a href="form-layouts.html">Form layouts</a></li>
+									<li><a href="wizard.html">Wizard</a></li>
+								</ul>
+							</li>
+							<li class="with-right-arrow">
+								<span><span class="list-count">2</span>Agenda &amp; Calendars</span>
+								<ul class="big-menu">
+									<li><a href="agenda.html">Agenda</a></li>
+									<li><a href="calendars.html">Calendars</a></li>
+								</ul>
+							</li>
+							<li><a href="blocks.html">Blocks &amp; infos</a></li>
+						</ul>
+					</li>
+					<li class="with-right-arrow">
+						<span><span class="list-count">8</span>設備管理子系統</span>
+						<ul class="big-menu">
+							<li><a href="auto-setup.html">Automatic setup</a></li>
+							<li><a href="responsive.html">Responsiveness</a></li>
+							<li><a href="tabs.html">Tabs</a></li>
+							<li><a href="sliders.html">Slider &amp; progress</a></li>
+							<li><a href="modals.html">Modal windows</a></li>
+							<li class="with-right-arrow">
+								<span><span class="list-count">3</span>Messages &amp; notifications</span>
+								<ul class="big-menu">
+									<li><a href="messages.html">Messages</a></li>
+									<li><a href="notifications.html">Notifications</a></li>
+									<li><a href="tooltips.html">Tooltips</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+                    <li class="with-right-arrow">
+						<span><span class="list-count">1</span>紅外線控制系統</span>
+                        <ul class="big-menu">
+                            <li><a href="RedSetting.aspx">紅外線設定</a></li>
+                        </ul>
+					</li>
+					<li class="with-right-arrow">
+						<a href="ajax-demo/submenu.html" class="navigable-ajax" title="Menu title">系統管理子系統</a>
+					</li>
+				</ul>
+			</section>--%>
+                <asp:Literal ID="Li2" runat="server" Text=""></asp:Literal>
+                <%--<uc:uc1 ID="myUC" runat="server" />--%>
+                <%-- <section class="navigable">
+				<ul class="big-menu">
+					<li class="with-right-arrow">
+						<span><span class="list-count">1</span>設備狀態子系統</span>
+						<ul class="big-menu">
+							<li><a href="Report/Device_Operate_Record.aspx">設備狀態查詢</a></li>
+							 
+						</ul>
+					</li>
+					<li class="with-right-arrow">
+						<span><span class="list-count">4</span>設備管理子系統</span>
+						<ul class="big-menu">
+							<li><a href="System/FloorSetting.aspx">停車場車輛設定</a></li>
+							<li><a href="System/LED_DisplaySetting.aspx">LED顯示設定</a></li>
+                            <li><a href="System/LED_Schedule.aspx">LED排程設定</a></li> 
+                            <li><a href="System/LED_Control.aspx">LED控制</a></li>  
+							 
+						</ul>
+					</li>
+					<li class="with-right-arrow">
+                        <span><span class="list-count">2</span>系統管理子系統</span>
+						 
+                        <ul class="big-menu">
+							<li><a href="data6_1.aspx">角色設定</a></li> 
+                            <li><a href="data6_2.aspx">權限設定</a></li> 
+						</ul>
+					</li>
+				</ul>
+			</section>--%>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <!-- End content wrapper -->
+            <br />
+            <span style="">&nbsp; &nbsp; &nbsp; Powered by 500net © 2021</span>
+            <br />
+            <br />
+            <br />
+            <div class="block large-margin-bottom" style="display: none;">
+                <div class="block-title">
+                    <h3>
+                        設備狀態事件</h3>
+                    <!--<span class="ribbon"><span class="ribbon-inner">3 new</span></span>-->
+                </div>
+                <asp:UpdatePanel ID="UpdatePanel7" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <ul class="events">
+                            <li><span class="event-date red">
+                                <asp:Literal ID="LI_illegal_car" runat="server" Text="0"></asp:Literal>
+                            </span><a href="#" class="event-description">
+                                <h4>
+                                    設備警示</h4>
+                                <p>
+                                    所有設備狀態異常清單</p>
+                            </a><span class="ribbon tiny"><span class="ribbon-inner red-gradient">注意</span></span>
+                            </li>
+                            <%--<li><span class="event-date with-month">25
+                            <!--<span class="event-month">April</span>-->
+                        </span>
+                            <h4>
+                                設備回應</h4>
+                            <p>
+                                所有設備狀態正常回應清單</p>
+                        </li>--%>
+                        </ul>
+                        <asp:Timer ID="Timer1" runat="server" Interval="6000" OnTick="Timer1_Tick">
+                        </asp:Timer>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
+                    </Triggers>
+                </asp:UpdatePanel>
+            </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder4" runat="server">
+            </asp:ContentPlaceHolder>
+        </section>
+        <!-- End sidebar/drop-down menu -->
+    </div>
+    </form>
+    <!-- JavaScript at the bottom for fast page loading -->
+    <!-- Scripts -->
+    <script src="<%=ResolveUrl("~/js/libs/jquery-1.10.2.min.js")%>"></script>
+    <%--<script src="<%=ResolveUrl( "~/js/libs/jquery-1.8.2-vsdoc.js"  ) %>" type="text/javascript"></script>--%>
+    <script src="<%=ResolveUrl("~/js/setup.js")%>"></script>
+    <!-- Template functions -->
+    <script src="<%=ResolveUrl("~/js/developr.input.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.message.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.modal.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.navigable.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.notify.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.scroll.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.progress-slider.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.tooltip.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.confirm.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.agenda.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/developr.tabs.js")%>"></script>
+    <!-- Must be loaded last -->
+    <!-- Tinycon -->
+    <script src="<%=ResolveUrl("~/js/libs/tinycon.min.js")%>"></script>
+    <!-- Plugins -->
+    <script src="<%=ResolveUrl("~/js/libs/jquery.tablesorter.min.js")%>"></script>
+    <script src="<%=ResolveUrl("~/js/libs/DataTables/jquery.dataTables.min.js")%>"></script>
+    <script>
+
+	    // Call template init (optional, but faster if called manually)
+	    $.template.init();
+
+	    // Favicon count
+	    //Tinycon.setBubble(2);
+
+	    // If the browser support the Notification API, ask user for permission (with a little delay)
+	    if (notify.hasNotificationAPI() && !notify.isNotificationPermissionSet()) {
+	        setTimeout(function() {
+	            notify.showNotificationPermission('Your browser supports desktop notification, click here to enable them.', function() {
+	                // Confirmation message
+	                if (notify.hasNotificationPermission()) {
+	                    notify('Notifications API enabled!', 'You can now see notifications even when the application is in background', {
+	                        icon: 'img/demo/icon.png',
+	                        system: true
+	                    });
+	                }
+	                else {
+	                    notify('Notifications API disabled!', 'Desktop notifications will not be used.', {
+	                        icon: 'img/demo/icon.png'
+	                    });
+	                }
+	            });
+
+	        }, 2000);
+	    }
+
+	    /*
+	    * Handling of 'other actions' menu
+	    */
+
+	    var otherActions = $('#otherActions'),
+			current = false;
+
+	    // Other actions
+	    $('.list .button-group a:nth-child(2)').menuTooltip('Loading...', {
+
+	        classes: ['with-mid-padding'],
+	        ajax: 'ajax-demo/tooltip-content.html',
+
+	        onShow: function(target) {
+	            // Remove auto-hide class
+	            target.parent().removeClass('show-on-parent-hover');
+	        },
+
+	        onRemove: function(target) {
+	            // Restore auto-hide class
+	            target.parent().addClass('show-on-parent-hover');
+	        }
+	    });
+
+	    // Delete button
+	    $('.list .button-group a:last-child').data('confirm-options', {
+
+	        onShow: function() {
+	            // Remove auto-hide class
+	            $(this).parent().removeClass('show-on-parent-hover');
+	        },
+
+	        onConfirm: function() {
+	            // Remove element
+	            $(this).closest('li').fadeAndRemove();
+
+	            // Prevent default link behavior
+	            return false;
+	        },
+
+	        onRemove: function() {
+	            // Restore auto-hide class
+	            $(this).parent().addClass('show-on-parent-hover');
+	        }
+
+	    });
+ 
+	    function openModal1() {
+	        $.modal({
+	            content: '<p>攝影機畫面1:</p>' +
+						  '<iframe width="640px" height="480px" src="RTSP/camera2.aspx" ></iframe>',
+	            title: 'Video window',
+	            width: 680,
+				height:530,
+	            scrolling: false,
+	            actions: {
+	                'Close': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                } 
+	            },
+	            buttons: {
+	                'Close': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            buttonsLowPadding: true
+	        });
+	    };
+	    function openModal2() {
+	        $.modal({
+	            content: '<p>攝影機畫面2:</p>' +
+						  '<iframe width="400px" height="300px" src="http://140.96.161.212/mjpeg.html" ></iframe>',
+	            title: 'Video window',
+	            width: 420,
+				height:350,
+	            scrolling: false,
+	            actions: {
+	                'Close': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                } 
+	            },
+	            buttons: {
+	                'Close': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            buttonsLowPadding: true
+	        });
+	    };
+	    function openModal3() {
+	        $.modal({
+	            content: '<p>攝影機畫面3:</p>' +
+						  '<iframe width="400px" height="300px" src="http://140.96.161.213/mjpeg.html" ></iframe>',
+	            title: 'Video window',
+	            width: 420,
+				height:350,
+	            scrolling: false,
+	            actions: {
+	                'Close': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                } 
+	            },
+	            buttons: {
+	                'Close': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            buttonsLowPadding: true
+	        });
+	    };
+        function openModal4() {
+	        $.modal({
+	            content: '<p>臨停攝影機畫面1:</p>' +
+						  '<iframe width="400px" height="300px" src="http://140.96.161.209/mjpeg.html" ></iframe>',
+	            title: 'Video window',
+	            width: 420,
+				height:350,
+	            scrolling: false,
+	            actions: {
+	                'Close': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                } 
+	            },
+	            buttons: {
+	                'Close': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            buttonsLowPadding: true
+	        });
+	    };
+        function openModal5() {
+	        $.modal({
+	            content: '<p>臨停攝影機畫面2:</p>' +
+						  '<iframe width="400px" height="300px" src="http://140.96.161.210/mjpeg.html" ></iframe>',
+	            title: 'Video window',
+	            width: 420,
+				height:350,
+	            scrolling: false,
+	            actions: {
+	                'Close': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                } 
+	            },
+	            buttons: {
+	                'Close': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            buttonsLowPadding: true
+	        });
+	    };
+        function openCamera_7PModal1() {
+	        $.modal({
+	            content: '<p>攝影機畫面2:</p>' +
+						  '<iframe width="400px" height="300px" src="http://10.10.14.26/mjpeg.html" ></iframe>',
+	            title: 'Video window',
+	            width: 420,
+				height:350,
+	            scrolling: false,
+	            actions: {
+	                'Close': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                } 
+	            },
+	            buttons: {
+	                'Close': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            buttonsLowPadding: true
+	        });
+	    };
+        function openCamera_7PModal2() {
+	        $.modal({
+	            content: '<p>攝影機畫面2:</p>' +
+						  '<iframe width="400px" height="300px" src="http://10.10.14.27/mjpeg.html" ></iframe>',
+	            title: 'Video window',
+	            width: 420,
+				height:350,
+	            scrolling: false,
+	            actions: {
+	                'Close': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                } 
+	            },
+	            buttons: {
+	                'Close': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            buttonsLowPadding: true
+	        });
+	    };
+
+        
+	    function openAlert() {
+	        $.modal.alert('This is an alert message', {
+	            buttons: {
+	                'Thanks, captain obvious': {
+	                    classes: 'huge blue-gradient glossy full-width',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            }
+	        });
+	    };
+ 
+	    function openPrompt() {
+	        var cancelled = false;
+
+	        $.modal.prompt('Please enter a value between 5 and 10:', function(value) {
+	            value = parseInt(value);
+	            if (isNaN(value) || value < 5 || value > 10) {
+	                $(this).getModalContentBlock().message('Please enter a correct value', { append: false, classes: ['red-gradient'] });
+	                return false;
+	            }
+
+	            $.modal.alert('Value: <strong>' + value + '</strong>');
+
+	        }, function() {
+	            if (!cancelled) {
+	                $.modal.alert('Oh, come on....');
+	                cancelled = true;
+	                return false;
+	            }
+	        });
+	    };
+ 
+	    function openConfirm() {
+	        $.modal.confirm('Challenge accepted?', function() {
+	            $.modal.alert('Me gusta!');
+
+	        }, function() {
+	            $.modal.alert('Meh.');
+	        });
+	    };
+
+	    /*
+	    * Agenda scrolling
+	    * This example shows how to remotely control an agenda. most of the time, the built-in controls
+	    * using headers work just fine
+	    */
+
+	    // Days
+	    var daysName = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+
+	    // Name display
+			agendaDay = $('#agenda-day'),
+
+	    // Agenda scrolling
+			agenda = $('#agenda').scrollAgenda({
+			    first: <%=(int)DateTime.Now.DayOfWeek%>,
+			    onRangeChange: function(start, end) {
+			        if (start != end) {
+			            agendaDay.text(daysName[start].substr(0, 3) + ' - ' + daysName[end].substr(0, 3));
+			        }
+			        else {
+			            agendaDay.text(daysName[start]);
+			        }
+			    }
+			});
+
+	    // Remote controls
+	    $('#agenda-previous').click(function(event) {
+	        event.preventDefault();
+	        agenda.scrollAgendaToPrevious();
+	    });
+	    $('#agenda-today').click(function(event) {
+	        event.preventDefault();
+	        agenda.scrollAgendaFirstColumn(2);
+	    });
+	    $('#agenda-next').click(function(event) {
+	        event.preventDefault();
+	        agenda.scrollAgendaToNext();
+	    });
+
+	    // Demo loading modal
+	    function openLoadingModal() {
+	        var timeout;
+
+	        $.modal({
+	            contentAlign: 'center',
+	            width: 240,
+	            title: 'Loading',
+	            content: '<div style="line-height: 25px; padding: 0 0 10px"><span id="modal-status">Contacting server...</span><br><span id="modal-progress">0%</span></div>',
+	            buttons: {},
+	            scrolling: false,
+	            actions: {
+	                'Cancel': {
+	                    color: 'red',
+	                    click: function(win) { win.closeModal(); }
+	                }
+	            },
+	            onOpen: function() {
+	                // Progress bar
+	                var progress = $('#modal-progress').progress(100, {
+	                    size: 200,
+	                    style: 'large',
+	                    barClasses: ['anthracite-gradient', 'glossy'],
+	                    stripes: true,
+	                    darkStripes: false,
+	                    showValue: false
+	                }),
+
+	                // Loading state
+						loaded = 0,
+
+	                // Window
+						win = $(this),
+
+	                // Status text
+						status = $('#modal-status'),
+
+	                // Function to simulate loading
+						simulateLoading = function() {
+						    ++loaded;
+						    progress.setProgressValue(loaded + '%', true);
+						    if (loaded === 100) {
+						        progress.hideProgressStripes().changeProgressBarColor('green-gradient');
+						        status.text('Done!');
+						        /*win.getModalContentBlock().message('Content loaded!', {
+						        classes: ['green-gradient', 'align-center'],
+						        arrow: 'bottom'
+						        });*/
+						        setTimeout(function() { win.closeModal(); }, 1500);
+						    }
+						    else {
+						        if (loaded === 1) {
+						            status.text('Loading data...');
+						            progress.changeProgressBarColor('blue-gradient');
+						        }
+						        else if (loaded === 25) {
+						            status.text('Loading assets (1/3)...');
+						        }
+						        else if (loaded === 45) {
+						            status.text('Loading assets (2/3)...');
+						        }
+						        else if (loaded === 85) {
+						            status.text('Loading assets (3/3)...');
+						        }
+						        else if (loaded === 92) {
+						            status.text('Initializing...');
+						        }
+						        timeout = setTimeout(simulateLoading, 50);
+						    }
+						};
+
+	                // Start
+	                timeout = setTimeout(simulateLoading, 2000);
+	            },
+	            onClose: function() {
+	                // Stop simulated loading if needed
+	                clearTimeout(timeout);
+	            }
+	        });
+	    };
+
+    </script>
+    <!-- Charts library -->
+    <!-- Load the AJAX API -->
+    <%--<script src="http://www.google.com/jsapi"></script>--%>
+    <script>
+
+        function menulink(v1) {
+            $('#loading').show();
+            window.top, location = v1;
+        }
+        $('#loading').hide();
+	    
+    </script>
+    <script>
+
+        // Call template init (optional, but faster if called manually)
+        $.template.init();
+
+        // Table sort - DataTables
+                var table = $('#mainDataTable');
+                table.dataTable({
+                    'aoColumnDefs': [
+        				{ 'bSortable': false, 'aTargets': [0, 1] }
+        			],
+                    "iDisplayLength": 25,
+                    "aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                    'sPaginationType': 'full_numbers',
+                    "sScrollX": "100%",
+                    "sScrollY":  "400px",
+                    "scrollCollapse": true,            
+                    'sDom': '<"dataTables_header"lfr>t<"dataTables_footer"ip>',
+                    'fnInitComplete': function (oSettings) {
+                        // Style length select
+                        table.closest('.dataTables_wrapper').find('.dataTables_length select').addClass('select blue-gradient glossy').styleSelect();
+                        tableStyled = true;
+                    },
+                    
+                });
+
+        $('#loading').hide();
+        //        table.fnSort([[0, 'desc']])
+        $('#sorting-advanced').show();
+
+        
+
+    </script>
+</body>
+</html>
